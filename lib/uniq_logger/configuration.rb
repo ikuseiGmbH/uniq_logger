@@ -1,9 +1,23 @@
 module UniqLogger
   class Configuration
     @config = {
-              :log_level => "verbose",
-              :min => 0,
-              :max => 99 
+              :log_rotator => "none",
+              :log_rotator_prefix => "uniq_logger-",
+              :global_logger => true,
+              :global_log_file_name => "uniq_logger.log",
+              :validates_uniqness_of_id => true,
+              :logfile_destination => "local",
+              :path_to_local_logfiles => "log",
+              :ftp => {
+                :username => "username",
+                :passwort => "password",
+                :server => "ftp.server.de",
+                :path => "/"
+              },
+              :csv => {
+                :encoding => "UTF8",
+                :col_sep => ";"
+              }
             }
 
     @valid_config_keys = @config.keys
@@ -15,7 +29,11 @@ module UniqLogger
 
     # Configure through yaml file
     def self.configure_with_path
-      path_to_yaml_file = "../config/uniq_logger.yml"
+      if defined?(::Rails).nil?
+        path_to_yaml_file = "../config/uniq_logger.yml"
+      else
+        path_to_yaml_file = "#{::Rails.root}/config/uniq_logger.yml"
+      end
       begin
         config = YAML::load(IO.read(path_to_yaml_file))
       rescue Errno::ENOENT

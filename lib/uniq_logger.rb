@@ -4,7 +4,9 @@ require "uniq_logger/configuration"
 require "uniq_logger/version"
 
 module UniqLogger
-  def self.configure
+  
+  def self.new
+    UniqLogger::Base.new
   end
 
 end
