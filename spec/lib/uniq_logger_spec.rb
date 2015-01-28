@@ -7,9 +7,9 @@ describe UniqLogger do
   end
 end
 
-describe UniqLogger::UniqLogger do
+describe UniqLogger::Base do
   it 'can do something' do
-    uniq_logger = UniqLogger::UniqLogger.new
+    uniq_logger = UniqLogger::Base.new
   end
   
 end

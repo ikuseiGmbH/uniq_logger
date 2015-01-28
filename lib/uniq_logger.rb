@@ -1,10 +1,13 @@
 require 'csv'
+require 'yaml'
+require "uniq_logger/configuration"
 require "uniq_logger/version"
 
 module UniqLogger
-  class UniqLogger
-    def initialize(opts={}, &block)
-    end
-    # Your code goes here...
+  def self.configure
   end
+
 end
+
+
+require 'uniq_logger/base'
