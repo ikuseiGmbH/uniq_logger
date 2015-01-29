@@ -40,21 +40,21 @@ describe UniqLogger::Base do
   end
 
   it 'should write a log rotator to a logfile per day' do
-    @logger.config["global_logger"] = "day"
+    @logger.config["log_rotator"] = "day"
     expect(@logger.create("12345", ["Vorname", "Nachname", "Strasse"])).to eq(true)
     expect(@logger.create("12346", ["Vorname2", "Nachname2", "Strasse2"])).to eq(true)
     expect(@logger.create("12346", ["Vorname3", "Nachname3", "Strasse3"])).to eq(true)
   end
 
   it 'should write a log rotator to a logfile per month' do
-    @logger.config["global_logger"] = "month"
+    @logger.config["log_rotator"] = "month"
     expect(@logger.create("12345", ["Vorname", "Nachname", "Strasse"])).to eq(true)
     expect(@logger.create("12346", ["Vorname2", "Nachname2", "Strasse2"])).to eq(true)
     expect(@logger.create("12346", ["Vorname3", "Nachname3", "Strasse3"])).to eq(true)
   end
 
   it 'should write a log rotator to a logfile per year' do
-    @logger.config["global_logger"] = "year"
+    @logger.config["log_rotator"] = "year"
     expect(@logger.create("12345", ["Vorname", "Nachname", "Strasse"])).to eq(true)
     expect(@logger.create("12346", ["Vorname2", "Nachname2", "Strasse2"])).to eq(true)
     expect(@logger.create("12346", ["Vorname3", "Nachname3", "Strasse3"])).to eq(true)
@@ -65,7 +65,7 @@ describe UniqLogger::Base do
     @logger.config["remote"]["auth_token"] = "QviQAtx1mq1ZCWC12RUy"
     @logger.config["remote"]["server"] = "http://localhost:3000"
     @logger.config["remote"]["endpoint"] = "/crm/api/v1/loggers.json"
-    expect(@logger.create("1111", ["Remote", "Server", "Strasse3"])).to eq(true)
+    expect(@logger.create("1112", ["Remote", "Server", "Strasse3"])).to eq(true)
   end
 
 

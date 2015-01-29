@@ -37,7 +37,7 @@ module UniqLogger
       end
 
       #Use Log Rotator?
-      if ['day','month','year'].include?(config["global_logger"])
+      if ['day','month','year'].include?(config["log_rotator"])
         logger_prefix = get_current_logger_prefix()
         rotator_logfilename = File.join(config["path_to_local_logfiles"], "#{config['log_rotator_prefix']}#{logger_prefix}.log")
         rotator_logfile = File.open( File.expand_path(rotator_logfilename), "a" )
@@ -62,7 +62,7 @@ module UniqLogger
     end
 
     def get_current_logger_prefix
-      case config["global_logger"]
+      case config["log_rotator"]
         when "day"
           filename_prefix = Time.now.strftime("%d-%m-%Y")
         when "month"
@@ -93,9 +93,9 @@ module UniqLogger
          request.basic_auth(config["remote"]["basic_auth"]["username"], config["remote"]["basic_auth"]["password"])
         end
         
-        request.body = { param_id.to_sym => uniq_id, param_data.to_sym => data_to_save }.to_s
+        request.form_data = { param_id.to_sym => uniq_id, param_data.to_sym => data_to_save.to_json }
         response = http.request(request)
-        
+
         json = JSON.parse response.body
         if json['response'] == "true"
           return true
