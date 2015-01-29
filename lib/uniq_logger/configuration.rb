@@ -8,11 +8,12 @@ module UniqLogger
               :validates_uniqness_of_id => true,
               :logfile_destination => "local",
               :path_to_local_logfiles => "log",
-              :ftp => {
-                :username => "username",
-                :passwort => "password",
-                :server => "ftp.server.de",
-                :path => "/"
+              :remote => {
+                :auth_token => "xyz123abc",
+                :server => "http://www.server.de",
+                :endpoint => "/api/v1/logger",
+                :url_param_for_id => "id",
+                :url_param_for_data => "data"
               },
               :csv => {
                 :encoding => "UTF8",

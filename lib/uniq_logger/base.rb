@@ -11,8 +11,8 @@ module UniqLogger
     def create(uniq_id, data_to_save=[])
       if config[:logfile_destination] == "local"
         create_local_log_entry(uniq_id, data_to_save)
-      elsif config[:logfile_destination] == "ftp"
-        create_ftp_log_entry(uniq_id, data_to_save)
+      elsif config[:logfile_destination] == "remote"
+        create_remote_log_entry(uniq_id, data_to_save)
       else
         puts "logfile_destination is not set to [local,ftp]"
         return false
@@ -64,11 +64,11 @@ module UniqLogger
     def get_current_logger_prefix
       case config[:global_logger]
         when "day"
-          filename_prefix = Time.now.strftime("%d-%m-%y")
+          filename_prefix = Time.now.strftime("%d-%m-%Y")
         when "month"
-          filename_prefix = Time.now.strftime("%m-%y")
+          filename_prefix = Time.now.strftime("%m-%Y")
         when "year"
-          filename_prefix = Time.now.strftime("%y")
+          filename_prefix = Time.now.strftime("%Y")
         else
           filename_prefix = ""
       end
@@ -76,8 +76,27 @@ module UniqLogger
     end
 
 
-    def create_ftp_log_entry(uniq_id, data_to_save)
-      
+    def create_remote_log_entry(uniq_id, data_to_save)
+      begin
+        auth_token = config[:remote][:auth_token]
+        server_name = config[:remote][:server]
+        endpoint = config[:remote][:endpoint]
+        param_id = config[:remote][:url_param_for_id]
+        param_data = config[:remote][:url_param_for_data]
+        uri = URI.parse("#{server_name}#{endpoint}?auth_token=#{auth_token}&#{param_id}=#{uniq_id}&#{param_data}=#{data_to_save}")
+        http = Net::HTTP.new(uri.host, 80)
+        request = Net::HTTP::Post.new(uri.request_uri)
+        response = http.request(request)
+        json = JSON.parse response.body
+        if json['response'] == "true"
+          return true
+        else
+          return false
+        end
+      rescue
+        puts "Connetion to Server failed"
+        return false
+      end
     end
     
   end

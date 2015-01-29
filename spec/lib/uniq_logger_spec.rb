@@ -53,7 +53,7 @@ describe UniqLogger::Base do
     expect(@logger.create("12346", ["Vorname3", "Nachname3", "Strasse3"])).to eq(true)
   end
 
-it 'should write a log rotator to a logfile per year' do
+  it 'should write a log rotator to a logfile per year' do
     @logger.config[:global_logger] = "year"
     expect(@logger.create("12345", ["Vorname", "Nachname", "Strasse"])).to eq(true)
     expect(@logger.create("12346", ["Vorname2", "Nachname2", "Strasse2"])).to eq(true)
