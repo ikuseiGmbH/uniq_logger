@@ -3,6 +3,7 @@ require 'yaml'
 require 'net/http'
 require 'uri'
 require 'json'
+require 'pry'
 require "uniq_logger/configuration"
 require "uniq_logger/version"
 

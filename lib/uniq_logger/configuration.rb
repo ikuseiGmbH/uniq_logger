@@ -29,7 +29,7 @@ module UniqLogger
 
     # Configure through hash
     def self.configure(opts = {})
-      opts.each {|k,v| @config[k.to_sym] = v if @valid_config_keys.include? k.to_sym}
+      opts.each {|k,v| @config[k.to_s] = v if @valid_config_keys.include? k.to_s}
     end
 
     # Configure through yaml file
