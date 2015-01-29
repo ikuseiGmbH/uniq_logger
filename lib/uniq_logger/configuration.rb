@@ -13,7 +13,11 @@ module UniqLogger
                 :server => "http://www.server.de",
                 :endpoint => "/api/v1/logger",
                 :url_param_for_id => "id",
-                :url_param_for_data => "data"
+                :url_param_for_data => "data",
+                :basic_auth => {
+                  :username => "",
+                  :password => ""
+                }
               },
               :csv => {
                 :encoding => "UTF8",

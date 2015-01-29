@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    uniq_logger (0.0.2)
+    uniq_logger (0.1.0)
 
 GEM
   remote: https://rubygems.org/

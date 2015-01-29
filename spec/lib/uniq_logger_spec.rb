@@ -60,5 +60,13 @@ describe UniqLogger::Base do
     expect(@logger.create("12346", ["Vorname3", "Nachname3", "Strasse3"])).to eq(true)
   end
 
+  it 'sould send data to remote api' do
+    @logger.config[:logfile_destination] = "remote"
+    @logger.config[:remote][:auth_token] = "QviQAtx1mq1ZCWC12RUy"
+    @logger.config[:remote][:server] = "http://localhost:3000"
+    @logger.config[:remote][:endpoint] = "/crm/api/v1/loggers.json"
+    expect(@logger.create("1111", ["Remote", "Server", "Strasse3"])).to eq(true)
+  end
+
 
 end

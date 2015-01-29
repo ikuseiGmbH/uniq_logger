@@ -83,10 +83,20 @@ module UniqLogger
         endpoint = config[:remote][:endpoint]
         param_id = config[:remote][:url_param_for_id]
         param_data = config[:remote][:url_param_for_data]
-        uri = URI.parse("#{server_name}#{endpoint}?auth_token=#{auth_token}&#{param_id}=#{uniq_id}&#{param_data}=#{data_to_save}")
-        http = Net::HTTP.new(uri.host, 80)
+
+        uri = URI.parse("#{server_name}#{endpoint}?auth_token=#{auth_token}")
+        puts "URI: #{uri.inspect}"
+
+        http = Net::HTTP.new(uri.host, uri.port)
         request = Net::HTTP::Post.new(uri.request_uri)
+        
+        if !config[:remote][:basic_auth][:username].nil? && !config[:remote][:basic_auth][:password].nil? && !config[:remote][:basic_auth][:username].empty? && !config[:remote][:basic_auth][:password].empty?
+         request.basic_auth config[:remote][:basic_auth][:username], config[:remote][:basic_auth][:password]
+        end
+        
+        request.body = { param_id.to_sym => uniq_id, param_data.to_sym => data_to_save }.to_s
         response = http.request(request)
+        
         json = JSON.parse response.body
         if json['response'] == "true"
           return true
