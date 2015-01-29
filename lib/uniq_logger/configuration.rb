@@ -1,27 +1,27 @@
 module UniqLogger
   class Configuration
     @config = {
-              :log_rotator => "none",
-              :log_rotator_prefix => "uniq_logger-",
-              :global_logger => true,
-              :global_log_file_name => "uniq_logger.log",
-              :validates_uniqness_of_id => true,
-              :logfile_destination => "local",
-              :path_to_local_logfiles => "log",
-              :remote => {
-                :auth_token => "xyz123abc",
-                :server => "http://www.server.de",
-                :endpoint => "/api/v1/logger",
-                :url_param_for_id => "id",
-                :url_param_for_data => "data",
-                :basic_auth => {
-                  :username => "",
-                  :password => ""
+              "log_rotator" => "none",
+              "log_rotator_prefix" => "uniq_logger-",
+              "global_logger" => true,
+              "global_log_file_name" => "uniq_logger.log",
+              "validates_uniqness_of_id" => true,
+              "logfile_destination" => "local",
+              "path_to_local_logfiles" => "log",
+              "remote" => {
+                "auth_token" => "xyz123abc",
+                "server" => "http://www.server.de",
+                "endpoint" => "/api/v1/logger",
+                "url_param_for_id" => "id",
+                "url_param_for_data" => "data",
+                "basic_auth" => {
+                  "username" => "",
+                  "password" => ""
                 }
               },
-              :csv => {
-                :encoding => "UTF8",
-                :col_sep => ";"
+              "csv" => {
+                "encoding" => "UTF8",
+                "col_sep" => ";"
               }
             }
 
