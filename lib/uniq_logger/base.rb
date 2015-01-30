@@ -10,9 +10,9 @@ module UniqLogger
 
     def create(uniq_id, data_to_save=[])
       if config["logfile_destination"] == "local"
-        create_local_log_entry(uniq_id, data_to_save)
+        return create_local_log_entry(uniq_id, data_to_save)
       elsif config["logfile_destination"] == "remote"
-        create_remote_log_entry(uniq_id, data_to_save)
+        return create_remote_log_entry(uniq_id, data_to_save)
       else
         puts "logfile_destination is not set to [local,remote]"
         return false
