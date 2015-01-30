@@ -20,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-create a configuration file config/uniq_logger.yml
+Create a configuration file config/uniq_logger.yml (view section 'Configuration')
+
+To create a logentry use:
 
 ```ruby
 require 'uniq_logger'
@@ -29,6 +31,8 @@ uniq_logger.create("UniqID", ["data","to","save"] )
 ```
 
 ## Configuration File
+
+app/config/uniq_logger.yml
 
 ```yml
 #Use a additional Log-Rotator which generates new logfiles for ['day','month','year'].
