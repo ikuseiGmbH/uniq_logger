@@ -14,7 +14,7 @@ module UniqLogger
       elsif config["logfile_destination"] == "remote"
         create_remote_log_entry(uniq_id, data_to_save)
       else
-        puts "logfile_destination is not set to [local,ftp]"
+        puts "logfile_destination is not set to [local,remote]"
         return false
       end
     end
@@ -27,7 +27,7 @@ module UniqLogger
         logfilename = File.join(config["path_to_local_logfiles"], config["global_log_file_name"])
         logfile = File.open( File.expand_path(logfilename), "a" )
         
-        if is_uniq_id_in_log_hostory?(uniq_id,logfile)
+        if is_uniq_id_in_log_history?(uniq_id,logfile)
           return false
         end
         
@@ -49,14 +49,10 @@ module UniqLogger
     end
 
 
-    def is_uniq_id_in_log_hostory?(uniq_id,logfile)
+    def is_uniq_id_in_log_history?(uniq_id,logfile)
       if config["validates_uniqness_of_id"] == true
-        data = CSV.read(logfile, {:col_sep => config["csv"]["col_sep"], :encoding => config["csv"]["encoding"] })
-        list_of_ids = data.map{ |a| a[0]}
-        #puts data
-        if list_of_ids.include?(uniq_id)
-          return true
-        end
+        regexp_uniq_id = /^#{uniq_id};/
+        return open(logfile).grep(regexp_uniq_id).any?
       end
       return false
     end

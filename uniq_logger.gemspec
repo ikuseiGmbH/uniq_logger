@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Marco Metz"]
   spec.email         = ["marco.metz@gmail.com"]
   spec.summary       = %q{checks for existing Logentries and adds new LogEntries}
-  spec.description   = %q{Adds Entries to an Logfile, only if not already exist. Logfile can be on an remote server}
+  spec.description   = %q{Adds entries to a logfile, only if they don't already exist. The logfile can be on a remote server}
   spec.homepage      = "https://github.com/ikuseiGmbH/uniq_logger"
   spec.license       = "GNU GENERAL PUBLIC LICENSE"
 

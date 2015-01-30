@@ -27,6 +27,8 @@ describe UniqLogger::Base do
   end
   
   it 'should write a log to a logfile with validation of ID true' do
+    expect(@logger.create("12343", ["Vorname", "12344", "Strasse"])).to eq(true)
+    expect(@logger.create("12344", ["Vorname", "12343", "Strasse"])).to eq(true)
     expect(@logger.create("12345", ["Vorname", "Nachname", "Strasse"])).to eq(true)
     expect(@logger.create("12346", ["Vorname2", "Nachname2", "Strasse2"])).to eq(true)
     expect(@logger.create("12346", ["Vorname3", "Nachname3", "Strasse3"])).to eq(false)
