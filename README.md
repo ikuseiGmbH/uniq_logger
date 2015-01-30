@@ -3,6 +3,7 @@
 - Add entries to an logfile, only if an uniq id is not already used.
 - automaticaly generate logfile rotations: new logfile für every day, motnh or year
 - send your logentries to another server per api using the same gem once as client and as a server
+- creates an CSV formated file which can be easely opened in e.g. Excel for endusers
 
 ## Installation
 
