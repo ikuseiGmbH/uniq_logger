@@ -93,7 +93,7 @@ module UniqLogger
         response = http.request(request)
 
         json = JSON.parse response.body
-        if json['response'] == "true"
+        if json['response'] == "true" || json['response'] == true
           return true
         else
           return false
